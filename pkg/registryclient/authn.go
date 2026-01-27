@@ -6,11 +6,11 @@ import (
 )
 
 type autoRefreshSecrets struct {
-	lister           corev1listers.SecretNamespaceLister
+	lister           corev1listers.SecretLister
 	imagePullSecrets []string
 }
 
-func NewAutoRefreshSecretsKeychain(lister corev1listers.SecretNamespaceLister, imagePullSecrets ...string) (authn.Keychain, error) {
+func NewAutoRefreshSecretsKeychain(lister corev1listers.SecretLister, imagePullSecrets ...string) (authn.Keychain, error) {
 	return &autoRefreshSecrets{
 		lister:           lister,
 		imagePullSecrets: imagePullSecrets,

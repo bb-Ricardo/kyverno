@@ -10,7 +10,7 @@ import (
 	corev1listers "k8s.io/client-go/listers/core/v1"
 )
 
-func DefaultRegistryClientFactory(globalClient engineapi.RegistryClient, secretsLister corev1listers.SecretNamespaceLister) engineapi.RegistryClientFactory {
+func DefaultRegistryClientFactory(globalClient engineapi.RegistryClient, secretsLister corev1listers.SecretLister) engineapi.RegistryClientFactory {
 	return &registryClientFactory{
 		globalClient:  globalClient,
 		secretsLister: secretsLister,
@@ -19,7 +19,7 @@ func DefaultRegistryClientFactory(globalClient engineapi.RegistryClient, secrets
 
 type registryClientFactory struct {
 	globalClient  engineapi.RegistryClient
-	secretsLister corev1listers.SecretNamespaceLister
+	secretsLister corev1listers.SecretLister
 }
 
 func (f *registryClientFactory) GetClient(ctx context.Context, creds *kyvernov1.ImageRegistryCredentials) (engineapi.RegistryClient, error) {
